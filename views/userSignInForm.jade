@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    h2 sign in form
+    if errorMessage
+        h3 #{errorMessage}
+    if signInData
+        form(action="", method="post") 
+            input(type="text", name="username",placeholder="username",value=signInData.username)
+            input(type="password", name="password",placeholder="password",value=signInData.password)
+            button(type="submit") sign-in
+    else 
+        form(action="", method="post") 
+            input(type="text", name="username",placeholder="username")
+            input(type="password", name="password",placeholder="password")
+            button(type="submit") sign-in

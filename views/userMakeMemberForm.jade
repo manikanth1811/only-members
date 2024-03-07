@@ -1,0 +1,10 @@
+extends layout 
+
+block content 
+
+    h2 Enter a secrect message to become a member 
+    p Hint: nearest star to earth(all small letters)
+    if errorMessage
+        p #{errorMessage}
+    form(action="", method="post")
+        input(type="text", name="passcode",placeholder="enter passcode")  
