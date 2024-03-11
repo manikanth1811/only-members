@@ -9,7 +9,6 @@ const { body, validationResult } = require("express-validator");
 exports.creteSignInForm = [
   passport.authenticate("local"),
   asyncHandler(async (req, res, next) => {
-    console.log(req);
     // Get the user from db for his user id
     const currUser = await userModel
       .findOne({ username: req.body.username })
@@ -54,7 +53,6 @@ exports.createSignUpForm = [
     const dbUser = await userModel
       .findOne({ username: req.body.username })
       .exec();
-    console.log("User in the DB", dbUser);
     const vr = validationResult(req);
     if (dbUser != null) {
       res.render("userSignUpForm", {
@@ -70,7 +68,6 @@ exports.createSignUpForm = [
         errors: errorMessages,
       });
     } else {
-      console.log("This is the request body", req.body);
       bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
         if (err) {
           res.status(400).json({
@@ -106,7 +103,6 @@ exports.createMakeMember = [
       vr.errors.forEach((error) => {
         errorMessages = errorMessages + error.msg + "  ";
       });
-      console.log("error messages in request", errorMessages);
       res.status(401).json({
         status: "false",
         message: "Enter a correct Passcode",
@@ -149,7 +145,6 @@ exports.createMakeAdmin = [
   asyncHandler(async (req, res, next) => {
     let vr = validationResult(req);
     if (!vr.isEmpty()) {
-      console.log(`vr is ${vr}`);
       res.status(401).json({
         errorMessage:
           "firstname of the application creator small caps(Check github)",

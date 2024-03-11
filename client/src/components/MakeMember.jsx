@@ -32,7 +32,7 @@ export default function Member() {
       async function testMember() {
         try {
           const makeMember = await axios.post(
-            "http://localhost:3000/member",
+            "https://only-members-v55m.onrender.com/member",
             {
               username: userProvider.userName,
               passcode: "sun",

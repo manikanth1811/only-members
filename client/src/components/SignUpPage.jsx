@@ -69,11 +69,14 @@ export default function SignUp() {
     }
     async function signUpCall() {
       try {
-        const signUpRes = await axios.post("http://localhost:3000/sign-up", {
-          username: usernameForm,
-          password: passwordForm,
-          fullname: fullNameForm,
-        });
+        const signUpRes = await axios.post(
+          "https://only-members-v55m.onrender.com/sign-up",
+          {
+            username: usernameForm,
+            password: passwordForm,
+            fullname: fullNameForm,
+          }
+        );
         console.log(signUpRes);
         if (signUpRes.status === 200) {
           setCompleteFormError("");

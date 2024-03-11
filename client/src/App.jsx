@@ -19,7 +19,7 @@ export default function App({}) {
     try {
       let AuthKey = "Bearer " + cookies.bearer;
       creds = await axios.post(
-        "http://localhost:3000/testauth",
+        "https://only-members-v55m.onrender.com/testauth",
         {},
         {
           headers: {

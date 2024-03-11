@@ -49,16 +49,19 @@ export default function SignIn() {
     if (errors.passwordErr === "" && errors.usernameErr === "") {
       async function test() {
         try {
-          const creds = await axios.post("http://localhost:3000/sign-in", {
-            username: usernameForm,
-            password: passwordForm,
-          });
+          const creds = await axios.post(
+            "https://only-members-v55m.onrender.com/sign-in",
+            {
+              username: usernameForm,
+              password: passwordForm,
+            }
+          );
           console.log(creds.data);
           setCookie("bearer", creds.data.token);
           let AuthKey = "Bearer " + creds.data.token;
           userContextProvider.setUserName(usernameForm);
           const c = await axios.post(
-            "http://localhost:3000/testauth",
+            "https://only-members-v55m.onrender.com/testauth",
             {},
             {
               headers: {

@@ -47,11 +47,14 @@ export default function Message() {
 
     async function createMessageFn() {
       try {
-        const postMessage = await axios.post("http://localhost:3000/message", {
-          username: userContext.userName,
-          messageBody: msgBody,
-          messageHead: msgHead,
-        });
+        const postMessage = await axios.post(
+          "https://only-members-v55m.onrender.com/message",
+          {
+            username: userContext.userName,
+            messageBody: msgBody,
+            messageHead: msgHead,
+          }
+        );
         if (postMessage.status === 200) {
           setCompleteFromError("");
           redirect("/");

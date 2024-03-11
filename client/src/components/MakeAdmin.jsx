@@ -30,7 +30,7 @@ export default function Admin() {
       async function makeAdminFun() {
         try {
           const makeAdmin = await axios.post(
-            "http://localhost:3000/admin",
+            "https://only-members-v55m.onrender.com/admin",
             {
               username: userProviderContext.userName,
               passcode: "manikanth",

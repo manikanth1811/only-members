@@ -12,10 +12,13 @@ function timeHelper(date) {
 
 async function deleteMsg(id, username, messageList, changeMessageList) {
   try {
-    const deleteM = await axios.post("http://localhost:3000/deletemessage", {
-      username: username,
-      id: id,
-    });
+    const deleteM = await axios.post(
+      "https://only-members-v55m.onrender.com/deletemessage",
+      {
+        username: username,
+        id: id,
+      }
+    );
     let newMessages = [];
     if (deleteM.status === 200) {
       messageList.forEach((message) => {
@@ -125,7 +128,7 @@ export default function MessageBody() {
   async function getMessages() {
     try {
       messages = await axios.post(
-        "http://localhost:3000/",
+        "https://only-members-v55m.onrender.com/",
         {
           username: userContextProvider.userName,
         },
