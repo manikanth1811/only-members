@@ -11,12 +11,17 @@ const localStrategy = require("passport-local").Strategy;
 var usersRouter = require("./routes/users");
 const membersOnlyRoutes = require("./routes/membersOnly");
 const bcrypt = require("bcryptjs");
-const mongoDbUrl =
-  "mongodb+srv://manikanth:manikanth@cluster0.jvz8p64.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+
+require("dotenv").config();
+const mongoDbUrl = process.env.DB_URL;
 
 const User = require("./schemas/users");
 var app = express();
-
+app.use(cors({ credentials: true, origin: `${process.env.ORIGIN_HOST}` }));
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -39,6 +44,28 @@ passport.use(
   })
 );
 
+passport.use(
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: "test",
+    },
+    // The done is the callback provided by passport
+    async (jwt_payload, done) => {
+      // Search the user with jwt.payload ID field
+      try {
+        const currUser = await User.findOne({ _id: jwt_payload._id }).exec();
+        if (!currUser) {
+          return done(null, false, { message: "Incorrect username" });
+        }
+        return done(null, currUser);
+      } catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -52,6 +79,7 @@ const sessionConnection = new MongoStore({
 app.use(
   exSession({
     secret: "secret key",
+    httpOnly: false,
     resave: false,
     saveUninitialized: true,
     store: sessionConnection,
