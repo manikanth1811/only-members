@@ -16,7 +16,7 @@ exports.getAllMessages = asyncHandler(async (req, res, next) => {
       messages = messages.slice((req.query.page - 1) * 10, req.query.page * 10);
     }
   }
-  console.log(req.get("host"));
+  console.log(req.get("origin"));
   const currUserName = req.body.username ? req.body.username : "";
   let messagesNoInfo = [];
   messages.forEach((message) => {
