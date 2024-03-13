@@ -21,7 +21,7 @@ const mongoDbUrl = process.env.DB_URL;
 
 const User = require("./schemas/users");
 var app = express();
-app.use(cors({ credentials: true, origin: `${process.env.ORIGIN_HOST}` }));
+app.use(cors({ credentials: true, origin: true }));
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
