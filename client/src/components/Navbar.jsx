@@ -64,15 +64,13 @@ function MenuItems({ userData }) {
           </Link>
         </li>
         <li>
-          <Link to="/signout">
-            <a className="text-lg font-bold flex items-center gap-1">
-              <span className="text-primary">Sign </span>
-              <span>Out</span>
-              <span className="h-[100%] flex items-center ">
-                <MdLogout size="17" />
-              </span>
-            </a>
-          </Link>
+          <a className="text-lg font-bold flex items-center gap-1">
+            <span className="text-primary">Sign </span>
+            <span>Out</span>
+            <span className="h-[100%] flex items-center ">
+              <MdLogout size="17" />
+            </span>
+          </a>
         </li>
       </>
     );
@@ -102,15 +100,13 @@ function MenuItems({ userData }) {
           </Link>
         </li>
         <li>
-          <Link to="/signout">
-            <a className="text-lg font-bold flex items-center gap-1">
-              <span className="text-primary">Sign </span>
-              <span>Out</span>
-              <span className="h-[100%] flex items-center ">
-                <MdLogout size="17" />
-              </span>
-            </a>
-          </Link>
+          <a className="text-lg font-bold flex items-center gap-1">
+            <span className="text-primary">Sign </span>
+            <span>Out</span>
+            <span className="h-[100%] flex items-center ">
+              <MdLogout size="17" />
+            </span>
+          </a>
         </li>
       </>
     );
@@ -138,15 +134,13 @@ function MenuItems({ userData }) {
           </a>
         </li>
         <li>
-          <Link to="/signout">
-            <a className="text-lg font-bold flex items-center gap-1">
-              <span className="text-primary">Sign </span>
-              <span>Out</span>
-              <span className="h-[100%] flex items-center ">
-                <MdLogout size="17" />
-              </span>
-            </a>
-          </Link>
+          <a className="text-lg font-bold flex items-center gap-1">
+            <span className="text-primary">Sign </span>
+            <span>Out</span>
+            <span className="h-[100%] flex items-center ">
+              <MdLogout size="17" />
+            </span>
+          </a>
         </li>
       </>
     );
