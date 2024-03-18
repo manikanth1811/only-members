@@ -2,7 +2,7 @@
   "name": "only-members",
   "version": "0.0.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "https://only-members-v55m.onrender.com/",
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon start"

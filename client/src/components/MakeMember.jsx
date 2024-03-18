@@ -46,7 +46,7 @@ export default function Member() {
           );
           console.log(makeMember);
           if (makeMember.status === 200) {
-            userProvider.setMember(true);
+            userProvider.changeStatus(!userProvider.status);
             navigate("/");
           } else {
             navigate("/signin");

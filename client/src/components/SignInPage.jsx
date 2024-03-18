@@ -57,25 +57,13 @@ export default function SignIn() {
             }
           );
           console.log(creds.data);
-          setCookie("bearer", creds.data.token);
-          let AuthKey = "Bearer " + creds.data.token;
-          userContextProvider.setUserName(usernameForm);
-          const c = await axios.post(
-            "https://only-members-v55m.onrender.com/testauth",
-            {},
-            {
-              headers: {
-                Authorization: AuthKey,
-              },
-              withCredentials: true,
-            }
-          );
-          if (c.status === 200) {
+          if (creds.status === 200) {
+            // set the cookies and the username
+            setCookie("bearer", creds.data.token);
+            userContextProvider.setUserName(usernameForm);
             redirect("/");
             setCompleteFormErrors("");
           }
-          userContextProvider.setAdmin(c.data.isAdmin);
-          userContextProvider.setMember(c.data.status);
         } catch (error) {
           setCompleteFormErrors(
             `Got code ${err.code}, with error message ${err.message}. Please Try again`

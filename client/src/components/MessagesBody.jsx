@@ -140,10 +140,13 @@ export default function MessageBody() {
         }
       );
       if (
-        (messages.status === 200 && messageData.length === 0) ||
+        (messages.status === 200 &&
+          messageData.length === 0 &&
+          messages.data.messages.length > 0) ||
         (messages.status === 200 &&
           messages.data.messages[0].messageUser != undefined &&
-          messageData[0].messageUser == undefined)
+          messageData[0].messageUser == undefined &&
+          messages.data.messages.length > 0)
       ) {
         setMessageData(messages.data.messages);
       }
@@ -174,6 +177,12 @@ export default function MessageBody() {
           </div>
         </div>
       )}
+      {messageData.length === 0 && (
+        <div className="titleName font-extrabold text-[2rem] text-center pt-5">
+          Become a <span className="text-primary">Member</span> to have{" "}
+          <span className="text-secondary">full access</span> to the site
+        </div>
+      )}
       {messageError != "" && <small>messageError</small>}
       {messageData.length != 0 &&
         messageData.map((message) => {
@@ -191,11 +200,3 @@ export default function MessageBody() {
     </div>
   );
 }
-
-// function PrintMessages({user,messages}){
-//     return (
-//         <>
-//         {messages.map((message)=)}
-//         </>
-//     )
-// }

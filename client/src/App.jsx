@@ -7,17 +7,25 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 
 export default function App({}) {
-  const [username, setUsername] = useState("");
   const [cookies, setCookie] = useCookies(["bearer"]);
+  const [username, setUsername] = useState("");
+  const [status, setStatus] = useState(true);
   const [adminFlag, setAdminFlag] = useState(false);
   const [memberFlag, setMemberFlag] = useState(false);
 
-  console.log(username);
-  console.log(adminFlag, memberFlag);
+  useEffect(() => {
+    let s = true;
+    if (s) test();
+    return () => {
+      s = false;
+    };
+  }, [username, status]);
+
   async function test() {
     let creds;
     try {
       let AuthKey = "Bearer " + cookies.bearer;
+
       creds = await axios.post(
         "https://only-members-v55m.onrender.com/testauth",
         {},
@@ -28,26 +36,32 @@ export default function App({}) {
           withCredentials: true,
         }
       );
-      console.log(creds.data);
       setAdminFlag(creds.data.isAdmin);
       setMemberFlag(creds.data.status);
       setUsername(creds.data.username);
     } catch (err) {
       console.log(err);
+      setAdminFlag(false);
+      setMemberFlag(false);
     }
   }
-  test();
 
+  console.log(adminFlag, memberFlag);
+  console.log(username);
   return (
     <div className="h-[100vh] w-[100vw] flex flex-col overflow-x-hidden">
       <UserContext.Provider
         value={{
           userName: username,
-          setUserName: (username) => setUsername(username),
+          setUserName: (username) => {
+            setUsername(username);
+          },
           isAdmin: adminFlag,
+          changeStatus: (statusFlag) => {
+            setStatus(statusFlag);
+          },
+          status: status,
           isMember: memberFlag,
-          setAdmin: (flag) => setAdminFlag(flag),
-          setMember: (flag) => setMemberFlag(flag),
         }}
       >
         <NavBar />

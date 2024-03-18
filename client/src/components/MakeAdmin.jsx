@@ -43,7 +43,7 @@ export default function Admin() {
             }
           );
           if (makeAdmin.status === 200) {
-            userProviderContext.setAdmin(true);
+            userProviderContext.changeStatus(!userProviderContext.status);
             redirect("/");
           } else {
             newErrors.passcodeError = makeAdmin.status;
